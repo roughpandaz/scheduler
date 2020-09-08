@@ -1,4 +1,6 @@
 import React, {useEffect} from 'react'
+import PropTypes from 'prop-types'
+
 import Header from "components/Appointment/Header";
 import Empty from "components/Appointment/Empty";
 import Show from "components/Appointment/Show";
@@ -11,7 +13,7 @@ import useVisualMode from "hooks/useVisualMode";
 
 import "./styles.scss";
 
-export default function Appointment(props) {
+const Appointment = function (props) {
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE"
@@ -109,3 +111,10 @@ export default function Appointment(props) {
     </>
   )
 }
+
+Appointment.propTypes = {
+  bookInterview: PropTypes.func.isRequired,
+  cancelInterview: PropTypes.func.isRequired,
+}
+
+export default Appointment
