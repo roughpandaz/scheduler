@@ -5,11 +5,12 @@ import Button from "components/Button";
 const Form = (props) => {
   // name:String
   // interviewer:Number
-  const [name, setName] = useState("");
-  const [interviewer, setInterviewer] = useState("");
+  const [name, setName] = useState(props.name || "");
+  const [interviewer, setInterviewer] = useState(props.interviewer);
+  const [error, setError] = useState("");
   
   const handleFormChange = (event) =>{
-    setName(event.target.value);
+    setName(event.target.value || "");
   }
 
   const reset = ()=>{
@@ -18,12 +19,10 @@ const Form = (props) => {
   }
 
   const onSave = () =>{
-    console.log(name, interviewer)
+    validate();
     if(name && interviewer){
       props.onSave(name, interviewer);
       reset();
-    } else {
-      alert("Please choose interviewer")
     }
   }
 
@@ -32,12 +31,14 @@ const Form = (props) => {
     reset();
   }
 
-  useEffect(()=>{
-    console.log("props.name", props.name)
-    setName(()=>{
-      return props.name;
-    });
-  }, [props.name])
+  function validate() {
+    if (name === "") {
+      setError("Student name cannot be blank");
+      return;
+    }
+  
+    props.onSave(name, interviewer);
+  }
 
   useEffect(()=>{
     setInterviewer(()=>{
@@ -48,6 +49,7 @@ const Form = (props) => {
   return (
     <>
       {console.log("K", props.interviewer, interviewer)}
+      {console.log("Name", name)}
       <main className="appointment__card appointment__card--create">
         <section className="appointment__card-left">
           <form autoComplete="off" onSubmit={event => event.preventDefault()}>
@@ -58,13 +60,15 @@ const Form = (props) => {
               value={name}
               placeholder="Enter Student Name"
               onChange = {handleFormChange}
+              data-testid="student-name-input"
               /*
                 This must be a controlled component
               */
             />
+            <section className="appointment__validation">{error}</section>
           </form>
           <InterviewerList 
-            interviewers={props.interviewers} 
+            interviewers={props.interviewers } 
             value={interviewer} 
             onChange={setInterviewer} />
         </section>

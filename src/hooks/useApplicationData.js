@@ -49,7 +49,6 @@ const useApplicationData = (initial) => {
 
     return axios.put(`/api/appointments/${id}`, appointment)
       .then((res)=>{
-        console.log("HERE", res);
 
         setState({
           ...state,

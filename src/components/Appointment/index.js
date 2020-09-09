@@ -55,7 +55,7 @@ const Appointment = function (props) {
 
 
   return (
-    <>
+    < div data-testid="appointment">
       <Header time = {props.time}/>
       {mode === EMPTY && <Empty onAdd={() =>
         transition(CREATE)
@@ -108,7 +108,7 @@ const Appointment = function (props) {
         />
         )}
       <article className="appointment"></article>
-    </>
+    </div>
   )
 }
 
