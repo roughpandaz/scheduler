@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from "react";
 import InterviewerList from "components/InterviewerList";
 import Button from "components/Button";
 
@@ -8,58 +8,56 @@ const Form = (props) => {
   const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer);
   const [error, setError] = useState("");
-  
-  const handleFormChange = (event) =>{
-    setName(event.target.value || "");
-  }
 
-  const reset = ()=>{
+  const handleFormChange = (event) => {
+    setName(event.target.value || "");
+  };
+
+  const reset = () => {
     setInterviewer(null);
     setName("");
-  }
+  };
 
-  const onSave = () =>{
+  const onSave = () => {
     validate();
-    if(name && interviewer){
+    if (name && interviewer) {
       props.onSave(name, interviewer);
       reset();
     }
-  }
+  };
 
-  const onCancel = ()=>{
+  const onCancel = () => {
     props.onCancel();
     reset();
-  }
+  };
 
   function validate() {
     if (name === "") {
       setError("Student name cannot be blank");
       return;
     }
-  
+
     props.onSave(name, interviewer);
   }
 
-  useEffect(()=>{
-    setInterviewer(()=>{
+  useEffect(() => {
+    setInterviewer(() => {
       return props.interviewer;
     });
-  }, [props.interviewer])
-  
+  }, [props.interviewer]);
+
   return (
     <>
-      {console.log("K", props.interviewer, interviewer)}
-      {console.log("Name", name)}
       <main className="appointment__card appointment__card--create">
         <section className="appointment__card-left">
-          <form autoComplete="off" onSubmit={event => event.preventDefault()}>
+          <form autoComplete="off" onSubmit={(event) => event.preventDefault()}>
             <input
               className="appointment__create-input text--semi-bold"
               name="name"
               type="text"
               value={name}
               placeholder="Enter Student Name"
-              onChange = {handleFormChange}
+              onChange={handleFormChange}
               data-testid="student-name-input"
               /*
                 This must be a controlled component
@@ -67,26 +65,25 @@ const Form = (props) => {
             />
             <section className="appointment__validation">{error}</section>
           </form>
-          <InterviewerList 
-            interviewers={props.interviewers } 
-            value={interviewer} 
-            onChange={setInterviewer} />
+          <InterviewerList
+            interviewers={props.interviewers}
+            value={interviewer}
+            onChange={setInterviewer}
+          />
         </section>
         <section className="appointment__card-right">
           <section className="appointment__actions">
-            <Button 
-              onClick={onCancel}
-              danger
-              >Cancel</Button>
-            <Button 
-              onClick={onSave}
-              confirm
-            >Save</Button>
+            <Button onClick={onCancel} danger>
+              Cancel
+            </Button>
+            <Button onClick={onSave} confirm>
+              Save
+            </Button>
           </section>
         </section>
       </main>
     </>
-  )
-}
+  );
+};
 
-export default Form
+export default Form;
