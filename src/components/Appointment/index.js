@@ -91,7 +91,7 @@ const Appointment = function (props) {
       {mode === DELETING && <Status message={DELETING} />}
       {mode === CONFIRM && (
         <Confirm
-          message={`Are you use you want to delete the appointment for ${props.interview.interviewer.name}`}
+          message={`Are you use you want to delete the appointment?`}
           onClick={onConfirmDelete}
           onCancel={onCancelDelete}
         />
