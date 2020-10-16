@@ -1,9 +1,13 @@
-export function getAppointmentsForDay(state, day) {
+/**
+ * Get days that is related to today
+ * @param {Obj} state React State
+ * @param {String} day Day to filter by
+ */
+const getDays = function (state, day) {
+  const newState = { ...state };
   if (!day || state.days.length < 1) {
     return [];
   }
-
-  const newState = { ...state };
 
   const days = newState.days.filter((el) => {
     return el.name === day;
@@ -12,6 +16,13 @@ export function getAppointmentsForDay(state, day) {
   if (days.length < 1) {
     return [];
   }
+  return days;
+};
+
+export function getAppointmentsForDay(state, day) {
+  const days = getDays(state, day);
+
+  if (days.length < 1) return [];
 
   const appointments = days[0].appointments;
 
@@ -25,41 +36,18 @@ export function getAppointmentsForDay(state, day) {
 }
 
 export function getInterviewersForDay(state, day) {
-  if (!day || state.days.length < 1) {
-    return [];
-  }
+  const days = getDays(state, day);
 
-  const newState = { ...state };
+  if (days.length < 1 || days[0].interviewers.length < 1) return [];
 
-  const days = newState.days.filter((el) => {
-    return el.name === day;
+  let interviewers = [];
+  const interviewerIds = days[0].interviewers;
+
+  interviewerIds.forEach((el) => {
+    interviewers.push(state.interviewers[el]);
   });
 
-  if (days.length < 1) {
-    return [];
-  }
-
-  const interviewersRes = [];
-
-  const appointments = days[0].appointments;
-
-  if (appointments.length < 1) {
-    return [];
-  }
-
-  appointments.filter((el) => {
-    return state.appointments[el].interview;
-  });
-
-  appointments.forEach((el) => {
-    if (!state.appointments[el].interview) return;
-
-    const interviewerId = state.appointments[el].interview.interviewer;
-    interviewersRes.push(state.interviewers[interviewerId]);
-  });
-
-  // removes duplicate interviewers
-  return [...new Set(interviewersRes)];
+  return interviewers;
 }
 
 export function getInterview(state, interview) {
