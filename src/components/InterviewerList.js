@@ -10,7 +10,6 @@ const InterviewerList = function (props) {
   );
 
   interviewers = interviewers.map((interviewer) => {
-    console.log("TESTING", interviewer);
     return (
       <InterviewListItem
         key={interviewer.id}

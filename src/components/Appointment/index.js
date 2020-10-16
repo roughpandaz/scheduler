@@ -87,7 +87,6 @@ const Appointment = function (props) {
           onSave={save}
         />
       )}
-      {mode === EMPTY && <Empty />}
       {mode === SAVING && <Status message={SAVING} />}
       {mode === DELETING && <Status message={DELETING} />}
       {mode === CONFIRM && (
