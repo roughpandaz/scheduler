@@ -13,6 +13,22 @@ const useApplicationData = () => {
     setState((prev) => ({ ...prev, day }));
   };
 
+  const setSpot = (increase, selectedDay) => {
+    console.log("HERER");
+    setState((prev) => {
+      console.log(increase, selectedDay);
+      let tempState = { ...prev };
+      let dayToSet = tempState.days.filter((day) => day === selectedDay);
+      console.log("dat", dayToSet);
+      if (increase) {
+        dayToSet[0].spots++;
+      } else {
+        dayToSet[0].spots--;
+      }
+      return tempState;
+    });
+  };
+
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
@@ -71,7 +87,7 @@ const useApplicationData = () => {
     });
   };
 
-  return { state, setDay, bookInterview, cancelInterview };
+  return { state, setDay, setSpot, bookInterview, cancelInterview };
 };
 
 export default useApplicationData;

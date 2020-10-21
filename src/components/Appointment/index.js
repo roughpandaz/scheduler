@@ -38,7 +38,10 @@ const Appointment = function (props) {
 
     props
       .bookInterview(props.id, interview)
-      .then(() => transition(SHOW))
+      .then(() => {
+        transition(SHOW);
+        props.updateSpot(true);
+      })
       .catch((err) => transition(ERROR_SAVE, true));
   }
 
@@ -47,7 +50,10 @@ const Appointment = function (props) {
 
     props
       .cancelInterview(props.id)
-      .then(() => transition(EMPTY))
+      .then(() => {
+        transition(EMPTY);
+        props.updateSpot(false);
+      })
       .catch((err) => transition(ERROR_DELETE, true));
   }
 
@@ -91,7 +97,7 @@ const Appointment = function (props) {
       {mode === DELETING && <Status message={DELETING} />}
       {mode === CONFIRM && (
         <Confirm
-          message={`Are you use you want to delete the appointment for ${props.interview.interviewer.name}`}
+          message={`Are you use you want to delete the appointment?`}
           onClick={onConfirmDelete}
           onCancel={onCancelDelete}
         />

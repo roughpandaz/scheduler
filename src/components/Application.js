@@ -15,8 +15,13 @@ export default function Application(props) {
     state,
     setDay,
     bookInterview,
+    setSpot,
     cancelInterview,
   } = useApplicationData();
+
+  const updateSpot = function (increase) {
+    setDay(increase, state.day);
+  };
 
   return (
     <main className="layout">
@@ -37,6 +42,7 @@ export default function Application(props) {
               time={appointment.time}
               interview={interview}
               interviewers={interviewers}
+              updateSpot={updateSpot}
               bookInterview={bookInterview}
               cancelInterview={cancelInterview}
             />
