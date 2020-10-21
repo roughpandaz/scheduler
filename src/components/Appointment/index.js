@@ -97,21 +97,9 @@ const Appointment = function (props) {
         />
       )}
       {mode === ERROR_DELETE && (
-        <Error
-          message={`Error deleting`}
-          onClose={() => {
-            back();
-          }}
-        />
+        <Error message={`Error deleting`} onClose={back} />
       )}
-      {mode === ERROR_SAVE && (
-        <Error
-          message={`Error saving`}
-          onClose={() => {
-            back();
-          }}
-        />
-      )}
+      {mode === ERROR_SAVE && <Error message={`Error saving`} onClose={back} />}
       <article className="appointment"></article>
     </div>
   );
