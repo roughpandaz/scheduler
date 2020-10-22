@@ -28,21 +28,23 @@ const Appointment = function (props) {
     props.interview ? SHOW : EMPTY
   );
 
-  function save(name, interviewer) {
-    const interview = {
-      student: name,
-      interviewer,
+  function save(isEdit) {
+    return (name, interviewer) => {
+      const interview = {
+        student: name,
+        interviewer,
+      };
+
+      transition(SAVING, true);
+
+      props
+        .bookInterview(props.id, interview)
+        .then(() => {
+          transition(SHOW);
+          if (!isEdit) props.updateSpot(false);
+        })
+        .catch((err) => transition(ERROR_SAVE, true));
     };
-
-    transition(SAVING, true);
-
-    props
-      .bookInterview(props.id, interview)
-      .then(() => {
-        transition(SHOW);
-        props.updateSpot(false);
-      })
-      .catch((err) => transition(ERROR_SAVE, true));
   }
 
   function onConfirmDelete() {
@@ -74,7 +76,11 @@ const Appointment = function (props) {
         />
       )}
       {mode === CREATE && (
-        <Form interviewers={props.interviewers} onCancel={back} onSave={save} />
+        <Form
+          interviewers={props.interviewers}
+          onCancel={back}
+          onSave={save(false)}
+        />
       )}
       {mode === EDIT && (
         <Form
@@ -82,7 +88,7 @@ const Appointment = function (props) {
           interviewer={props.interview.interviewer.id}
           interviewers={props.interviewers}
           onCancel={back}
-          onSave={save}
+          onSave={save(true)}
         />
       )}
       {mode === SAVING && <Status message={SAVING} />}
