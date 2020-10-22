@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, cleanup, shallow } from "@testing-library/react";
+import { render, cleanup } from "@testing-library/react";
 
 import Form from "components/Appointment/Form";
 
@@ -34,7 +34,7 @@ describe("Form", () => {
 
     const onSave = jest.fn(() => "default");
 
-    const res = shallow(
+    render(
       <Form
         interviewers={interviewers}
         onSave={onSave}
