@@ -20,7 +20,7 @@ export default function Application(props) {
   } = useApplicationData();
 
   const updateSpot = function (increase) {
-    setDay(increase, state.day);
+    setSpot(increase, state.day);
   };
 
   return (

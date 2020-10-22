@@ -40,7 +40,7 @@ const Appointment = function (props) {
       .bookInterview(props.id, interview)
       .then(() => {
         transition(SHOW);
-        props.updateSpot(true);
+        props.updateSpot(false);
       })
       .catch((err) => transition(ERROR_SAVE, true));
   }
@@ -52,7 +52,7 @@ const Appointment = function (props) {
       .cancelInterview(props.id)
       .then(() => {
         transition(EMPTY);
-        props.updateSpot(false);
+        props.updateSpot(true);
       })
       .catch((err) => transition(ERROR_DELETE, true));
   }
@@ -74,22 +74,14 @@ const Appointment = function (props) {
         />
       )}
       {mode === CREATE && (
-        <Form
-          interviewers={props.interviewers}
-          onCancel={() => {
-            back();
-          }}
-          onSave={save}
-        />
+        <Form interviewers={props.interviewers} onCancel={back} onSave={save} />
       )}
       {mode === EDIT && (
         <Form
           name={props.interview.student}
           interviewer={props.interview.interviewer.id}
           interviewers={props.interviewers}
-          onCancel={() => {
-            back();
-          }}
+          onCancel={back}
           onSave={save}
         />
       )}

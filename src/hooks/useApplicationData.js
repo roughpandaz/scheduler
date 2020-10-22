@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+// import { data } from "cypress/types/jquery";
 
 /**
  * Custom hook to fetch all data required for the application
@@ -17,17 +18,13 @@ const useApplicationData = () => {
   };
 
   const setSpot = (increase, selectedDay) => {
-    console.log("HERER");
     setState((prev) => {
-      console.log(increase, selectedDay);
       let tempState = { ...prev };
-      let dayToSet = tempState.days.filter((day) => day === selectedDay);
-      console.log("dat", dayToSet);
-      if (increase) {
-        dayToSet[0].spots++;
-      } else {
-        dayToSet[0].spots--;
-      }
+      tempState.days.filter((day) => {
+        if (day.name === selectedDay) {
+          return increase ? day.spots++ : day.spots--;
+        }
+      });
       return tempState;
     });
   };
