@@ -36,8 +36,6 @@ const Form = (props) => {
       setError("Student name cannot be blank");
       return;
     }
-
-    props.onSave(name, interviewer);
   }
 
   useEffect(() => {
