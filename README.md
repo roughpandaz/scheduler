@@ -35,6 +35,64 @@ npm test
 
 #### NOTE: Tests will having warnings, but they should all pass
 
+```js
+ PASS  src/components/__tests__/DayListItem.test.js
+ PASS  src/hooks/__tests__/useVisualMode.test.js
+ PASS  src/components/__tests__/Button.test.js
+ PASS  src/components/__tests__/Application.test.js
+ PASS  src/components/__tests__/Form.test.js
+ PASS  src/hooks/__tests__/useApplicationData.test.js
+  ● Console
+
+    console.error node_modules/react-test-renderer/cjs/react-test-renderer.development.js:120
+      Warning: An update to TestHook inside a test was not wrapped in act(...).
+
+      When testing, code that causes React state updates should be wrapped into act(...):
+
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+
+      This ensures that youre testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+          in TestHook
+          in Suspense
+    console.error node_modules/react-test-renderer/cjs/react-test-renderer.development.js:120
+      Warning: An update to TestHook inside a test was not wrapped in act(...).
+
+      When testing, code that causes React state updates should be wrapped into act(...):
+
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+
+      This ensures that youre testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+          in TestHook
+          in Suspense
+    console.error node_modules/react-test-renderer/cjs/react-test-renderer.development.js:120
+      Warning: An update to TestHook inside a test was not wrapped in act(...).
+
+      When testing, code that causes React state updates should be wrapped into act(...):
+
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+
+      This ensures that youre testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+          in TestHook
+          in Suspense
+
+ PASS  src/helpers/__tests__/selectors.test.js
+
+Test Suites: 7 passed, 7 total
+Tests:       35 passed, 35 total
+Snapshots:   0 total
+Time:        4.668s
+Ran all test suites.
+```
+
 ## Running Storybook Visual Testbed
 
 ```sh
