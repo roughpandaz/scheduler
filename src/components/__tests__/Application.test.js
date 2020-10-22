@@ -1,16 +1,16 @@
 import React from "react";
 
-import { 
-  render, 
-  fireEvent, 
-  cleanup, 
-  waitForElement, 
-  getByText, 
+import {
+  render,
+  fireEvent,
+  cleanup,
+  waitForElement,
+  getByText,
   getAllByTestId,
   // getByAltText,
   getByPlaceholderText,
   queryByText,
-  getAllByAltText
+  getAllByAltText,
 } from "@testing-library/react";
 
 import Application from "components/Application";
@@ -36,7 +36,7 @@ it("loads data, books an interview and reduces the spots remaining for Monday by
   fireEvent.click(getAllByAltText(appointment, "Add")[0]);
 
   fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
-    target: { value: "Lydia Miller-Jones" }
+    target: { value: "Lydia Miller-Jones" },
   });
 
   fireEvent.click(getByText(appointment, "Tori Malcolm"));
@@ -46,9 +46,9 @@ it("loads data, books an interview and reduces the spots remaining for Monday by
 
   await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
 
-  const day = getAllByTestId(container, "day").find(day =>
+  const day = getAllByTestId(container, "day").find((day) =>
     queryByText(day, "Monday")
   );
 
-  expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
+  expect(getByText(day, "no spots remaining")).toBeInTheDocument();
 });
