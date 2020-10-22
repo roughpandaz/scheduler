@@ -38,14 +38,20 @@ export function getAppointmentsForDay(state, day) {
 export function getInterviewersForDay(state, day) {
   const days = getDays(state, day);
 
-  if (days.length < 1 || days[0].interviewers.length < 1) return [];
+  if (
+    days.length < 1 ||
+    (days[0] && days[0].interviewers && days[0].interviewers.length < 1)
+  )
+    return [];
 
   let interviewers = [];
   const interviewerIds = days[0].interviewers;
 
-  interviewerIds.forEach((el) => {
-    interviewers.push(state.interviewers[el]);
-  });
+  if (interviewerIds) {
+    interviewerIds.forEach((el) => {
+      interviewers.push(state.interviewers[el]);
+    });
+  }
 
   return interviewers;
 }

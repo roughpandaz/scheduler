@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
+/**
+ * Custom hook to fetch all data required for the application
+ */
 const useApplicationData = () => {
   const [state, setState] = useState({
     day: "Monday",
